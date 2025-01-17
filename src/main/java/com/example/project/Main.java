@@ -113,16 +113,10 @@ public class Main{
     // fix34([3, 2, 2, 4]) → [3, 4, 2, 2]
 
     public static ArrayList<Integer> fix34(ArrayList<Integer> list){
-        int index3 = -1;
         for(int i=0; i<list.size();i++){
             if(list.get(i)==3){
-                index3=i;
+                
             }
-            if(list.get(i)==4){
-                list.remove(i); //remove the 4
-                list.add(index3+1,4); //insert the 4 next to the most recent 3
-            }
-        }
         return list;
     }
 
@@ -131,8 +125,8 @@ public class Main{
 
     public static void main(String[] args) {
         ArrayList<Integer> x = new ArrayList<Integer>();
-        Collections.addAll(x,0);
-        System.out.println(zeroFront(x));
+        Collections.addAll(x,1, 3, 1, 4, 4, 3, 1);
+        System.out.println(fix34(x));
     }
 
 }
