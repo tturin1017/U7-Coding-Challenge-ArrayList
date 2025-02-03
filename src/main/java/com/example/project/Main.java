@@ -3,6 +3,73 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Main{
+    
+    
+    /** Inserts toInsert after each String in stringList
+    *  that contains the letter "i"
+    *
+    *  DOES mutate (modify) elements of stringList.
+    *  PRECONDITION: stringList.size() > 0, toInsert.length() > 0
+    *
+    *  @param stringList  original arraylist of Strings
+    *  @param str String to insert
+    */
+    public static ArrayList<String> insertAfterI(ArrayList<String> stringList, String str){
+        for(int i =0 ; i < stringList.size(); i++){
+            if(stringList.get(i).contains("i")){
+                stringList.add(i+1,str);
+                i++;
+            }
+        }
+        
+        return stringList;
+    }
+
+    /** Removes all Strings from stringList that have a length of 3
+   *
+   *  DOES mutate (modify) elements of stringList.
+   *  PRECONDITION: stringList.size() > 0
+   *
+   *  @param stringList  original arraylist of Strings
+   */
+    public static ArrayList<String> removeThree(ArrayList<String> stringList){
+        for(int i =0; i<stringList.size(); i++){
+            if(stringList.get(i).length()==3){
+                stringList.remove(i);
+                i--;
+            }
+        }
+
+        return stringList;
+    }
+
+    /** Returns an ArrayList with all elements of arr reversed
+   *
+   *  Does NOT mutate (modify) elements in intList.
+   *  PRECONDITION: intList.size() > 0
+   *
+   *  @param intList  original array of integers
+   */
+    public static ArrayList<Integer> reverseArray(int[] intList){
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int i=intList.length-1;i>=0;i--){
+            list.add(intList[i]);
+        }
+        return list;
+    }
+
+
+ 
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<String>();
+        Collections.addAll(list,"this", "is", "not", "a", "trivial", "task", "right?");
+        ArrayList<String> expected = new ArrayList<>();
+        Collections.addAll(expected,"this", "bob","is","bob","not", "a", "trivial", "bob","task", "right?", "bob" );
+
+        System.out.println(insertAfterI(list, "bob"));
+    }
+
+
     // Given an array of ints, 
     // return true if the array is length 1 or more, 
     // and the first element and the last element are equal.
@@ -113,20 +180,30 @@ public class Main{
     // fix34([3, 2, 2, 4]) → [3, 4, 2, 2]
 
     public static ArrayList<Integer> fix34(ArrayList<Integer> list){
-        for(int i=0; i<list.size();i++){
+        int last_4 = -1;
+        for(int i =0 ; i < list.size(); i ++){
             if(list.get(i)==3){
-                
+                for(int j=0;j<list.size();j++){
+                    if(list.get(j)==4 && j>last_4){
+                        //swap
+                        int temp = list.get(j);
+                        list.set(j,list.get(i+1));
+                        list.set(i+1,temp);
+                        last_4 = j;
+                    }
+                }
             }
+        }
         return list;
     }
 
     
 
 
-    public static void main(String[] args) {
-        ArrayList<Integer> x = new ArrayList<Integer>();
-        Collections.addAll(x,1, 3, 1, 4, 4, 3, 1);
-        System.out.println(fix34(x));
-    }
+    // public static void main(String[] args) {
+    //     ArrayList<Integer> x = new ArrayList<Integer>();
+    //     Collections.addAll(x,1, 3, 1, 4, 4, 3, 1);
+    //     System.out.println(fix34(x));
+    // }
 
 }
