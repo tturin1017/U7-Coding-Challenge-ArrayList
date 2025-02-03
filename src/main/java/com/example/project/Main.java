@@ -293,13 +293,4 @@ public class Main{
         return list;
     }
 
-    
-
-
-    // public static void main(String[] args) {
-    //     ArrayList<Integer> x = new ArrayList<Integer>();
-    //     Collections.addAll(x,1, 3, 1, 4, 4, 3, 1);
-    //     System.out.println(fix34(x));
-    // }
-
 }
