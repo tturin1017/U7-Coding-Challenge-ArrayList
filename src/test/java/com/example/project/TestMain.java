@@ -30,6 +30,36 @@ public class TestMain{
         ArrayList<Integer> expected = new ArrayList<Integer>(Arrays.asList(7,6,5,4,3,2,1));
         assertEquals(expected, Main.reverseArray(intList));
     }
+    @Test
+    public void testDuplicateUpperEnd(){
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList("hello", "my", "best", "friend", "whats", "up"));
+        ArrayList<String> expected = new ArrayList<String>(Arrays.asList("hello", "my", "best", "friend", "whats", "up", "HELLO","MY", "BEST", "FRIEND", "WHATS", "UP"));
+        assertEquals(expected, Main.duplicateUpperEnd(list));
+    }
+
+    @Test
+    public void testParseSentence(){
+        String sentence = "This is a sentence!";
+        ArrayList<String> expected = new ArrayList<String>(Arrays.asList("This", "is", "a", "sentence!"));
+        assertEquals(expected,Main.parseSentence(sentence));
+    }
+
+    @Test
+    public void testMoveBWords(){
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList("apple", "banana", "cherry", "donut", "Bagel", "danish", "berry", "baguette", "soda"));
+        ArrayList<String> expected = new ArrayList<String>(Arrays.asList("banana", "Bagel", "berry", "baguette", "apple", "cherry", "donut", "danish", "soda"));
+        assertEquals(expected, Main.moveBWords(list));
+    }
+
+    @Test
+    public void testRemoveDuplicates(){
+        ArrayList<Integer> list = new ArrayList<Integer>(Arrays.asList(1, 2, 5, 4, 2, 2, 1, 6, 4, 4, 8, 1, 7, 4, 2));
+        ArrayList<Integer> expected = new ArrayList<Integer>(Arrays.asList(1, 2, 5, 4, 6, 8, 7));
+        assertEquals(expected,Main.removeDuplicates(list));
+    }
+
+    
+
 
     @Test
     public void testSameFirstLast(){

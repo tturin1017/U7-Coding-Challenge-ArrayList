@@ -1,5 +1,6 @@
 package com.example.project;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class Main{
@@ -58,15 +59,110 @@ public class Main{
         return list;
     }
 
+    /** Appends an uppercase version of each string to the end of wordList;
+     *  the uppercase versions appear in the same order as the lowercase versions
+     *  for example, if wordList is ["hello", "my", "best", "friend"]
+     *  this this method modifies wordList to be:
+     *  ["hello", "my", "best", "friend", "HELLO", "MY", "BEST", "FRIEND"]
+     *
+     *  DOES mutate (modify) elements in wordList
+     *  PRECONDITIONS: wordList.size() > 0,
+     *                 all words in wordList are initially lowercase
+     *
+     *  @param wordList  arraylist of Strings
+     */
+    public static ArrayList<String> duplicateUpperEnd(ArrayList<String> wordList){
+        int size = wordList.size();
+        int j=0;
+        for(int i=0;i<size;i++){
+            wordList.add(wordList.get(j).toUpperCase());
+            j++;
+        }
+        return wordList;
+    }
+
+    /** Returns an arraylist of Strings that represents the input sentence parsed
+   *  into separate words, using a single space (" ") as the delimiter
+   *
+   *  For example, if sentence = "This is my sentence!"
+   *  this method return the arraylist: [This, is, my, sentence!]
+   *
+   *  PRECONDITION: sentence does not end with a space and each word is
+   *                separated by exactly one space
+   *
+   *  @param sentence  the input String
+   *  @return  new arraylist of Strings containing the words of sentence
+   */
+
+    public static ArrayList<String> parseSentence(String sentence){
+        sentence+=" ";
+        ArrayList<String> list = new ArrayList<>();
+        int start = 0;
+        for(int i=0; i <sentence.length(); i++){
+            if(sentence.substring(i,i+1).equals(" ")){
+                list.add(sentence.substring(start,i));
+                start=i+1;
+            }
+        }
+        return list;
+    }
+
+    /** Moves all words in wordList that begin with "b" to the front of
+   *  wordList; all "b" words that are moved should appear in the same order
+   *  in the modified arrayList as they did before being moved
+   *
+   *  For example, this method will take a wordList:
+   *  ["apple", "banana", "cherry", "donut", "Bagel", "danish", "berry", "baguette", "soda"]
+   *  and modify it to
+   *  ["banana", "Bagel", "berry", "baguette", "apple", "cherry", "donut", "danish", "soda"]
+   *
+   *  DOES mutate (modify) elements in wordList
+   *  PRECONDITIONS: - wordList.size() > 0
+   *                 - all strings in wordList have length >= 1
+   *
+   *  @param wordList  arraylist of words
+   */
+    public static ArrayList<String> moveBWords(ArrayList<String> wordList){
+        ArrayList<String>newList = new ArrayList<>();
+
+
+        for(int i=0; i<wordList.size();i++){
+            if(wordList.get(i).substring(0,1).equals("b") || wordList.get(i).substring(0,1).equals("B")  ){
+                newList.add(wordList.get(i));
+                wordList.remove(i);
+                i--;
+            }
+        }
+        newList.addAll(wordList);
+        return newList;
+    }
+
+    /** Removes all duplicate values from an intList, leaving only the first
+     *  occurrence in the arrayList; for example, this method will modify
+     *  [1, 2, 5, 4, 2, 2, 1, 6, 4, 4, 8, 1, 7, 4, 2] --> [1, 2, 5, 4, 6, 8, 7]
+     *
+     *  DOES mutate (modify) elements in intList
+     *  PRECONDITION: intList.size() > 0
+     *
+     *  @param intList  intList of Integers
+     */
+    public static ArrayList<Integer> removeDuplicates(ArrayList<Integer> intList){
+        for(int i =0 ; i < intList.size();i++){
+            for(int j=i+1; j<intList.size();j++){
+                if(intList.get(i)==intList.get(j)){
+                    intList.remove(j);
+                    j--;
+                }
+            }
+        }
+        return intList;
+    }
 
  
     public static void main(String[] args) {
-        ArrayList<String> list = new ArrayList<String>();
-        Collections.addAll(list,"this", "is", "not", "a", "trivial", "task", "right?");
-        ArrayList<String> expected = new ArrayList<>();
-        Collections.addAll(expected,"this", "bob","is","bob","not", "a", "trivial", "bob","task", "right?", "bob" );
-
-        System.out.println(insertAfterI(list, "bob"));
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList("apple", "banana", "cherry", "donut", "Bagel", "danish", "berry", "baguette", "soda"));
+        ArrayList<String> expected = new ArrayList<String>(Arrays.asList("banana", "bagel", "berry", "baguette", "apple", "cherry", "donut", "danish", "soda"));
+        System.out.println(moveBWords(list));
     }
 
 
