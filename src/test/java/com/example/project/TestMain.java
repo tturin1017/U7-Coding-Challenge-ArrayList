@@ -42,6 +42,10 @@ public class TestMain{
         String sentence = "This is a sentence!";
         ArrayList<String> expected = new ArrayList<String>(Arrays.asList("This", "is", "a", "sentence!"));
         assertEquals(expected,Main.parseSentence(sentence));
+
+        String sentence2 = "This is another random sentence! It is slightly longer.";
+        ArrayList<String> expected2 = new ArrayList<String>(Arrays.asList("This","is","another", "random", "sentence!", "It", "is", "slightly","longer."));
+        assertEquals(expected2, Main.parseSentence(sentence2));
     }
 
     @Test
@@ -59,8 +63,6 @@ public class TestMain{
     }
 
     
-
-
     @Test
     public void testSameFirstLast(){
         ArrayList<Integer> list = new ArrayList<Integer>();
@@ -74,10 +76,6 @@ public class TestMain{
     }
 
     @Test
-      // swapEnds([1, 2, 3, 4]) → [4, 2, 3, 1]
-    // swapEnds([1, 2, 3]) → [3, 2, 1]
-    // swapEnds([8, 6, 7, 9, 5]) → [5, 6, 7, 9, 8]
-    // swapEnds([]->[])+
     public void testSwapEnds(){
         ArrayList<Integer> list = new ArrayList<Integer>();
         Collections.addAll(list, 1,2,3,4);
@@ -93,9 +91,7 @@ public class TestMain{
         assertEquals(expected,Main.swapEnds(list));
     }
 
-    // zeroFront([1, 0, 0, 1]) → [0, 0, 1, 1]
-    // zeroFront([0, 1, 1, 0, 1]) → [0, 0, 1, 1, 1]
-    // zeroFront([1, 0]) → [0, 1]
+
     @Test
     public void testZeroFront(){
         ArrayList<Integer> list = new ArrayList<Integer>();
@@ -117,9 +113,6 @@ public class TestMain{
  
     }
 
-    // notAlone([1, 2, 3], 2) → [1, 3, 3]
-    // notAlone([1, 2, 3, 2, 5, 2], 2) → [1, 3, 3, 5, 5, 2]
-    // notAlone([3, 4], 3) → [3, 3]
     @Test
     public void testNotAlone(){
         ArrayList<Integer> list = new ArrayList<Integer>();
@@ -143,9 +136,7 @@ public class TestMain{
         assertEquals(expected,Main.notAlone(list,4));
     }
 
-    // shiftLeft([6, 2, 5, 3]) → [2, 5, 3, 6]
-    // shiftLeft([1, 2]) → [2, 1]
-    // shiftLeft([1]) → [1]
+
     @Test
     public void TestShiftLeft(){
         ArrayList<Integer> list = new ArrayList<Integer>();
@@ -165,11 +156,8 @@ public class TestMain{
         assertEquals(expected,Main.shiftLeft(list));
     }
 
-    // fix34([1, 3, 1, 4]) → [1, 3, 4, 1]
-    // fix34([1, 3, 1, 4, 4, 3, 1]) → [1, 3, 4, 1, 1, 3, 4]
-    // fix34([3, 2, 2, 4]) → [3, 4, 2, 2]
 
-    //@Test
+    @Test
     public void testFix34(){
         ArrayList<Integer> list = new ArrayList<Integer>();
         Collections.addAll(list,1,3,1,4);
@@ -182,7 +170,50 @@ public class TestMain{
         Collections.addAll(expected,1, 3, 4, 1, 1, 3, 4);
         assertEquals(expected,Main.fix34(list));
         list.clear();expected.clear();
+
+        Collections.addAll(list,3,2,2,4);
+        Collections.addAll(expected,3,4,2,2);
+        assertEquals(expected,Main.fix34(list));
     }
 
-    
+    @Test
+    public void testMode(){
+        int[] intList18 = {1, 2, 3, 2, 4, 5, 5, 6};
+        ArrayList<Integer> modes = Main.modes(intList18);
+        ArrayList<Integer> expected = new ArrayList<>(Arrays.asList(2,5));
+        assertEquals(expected,modes);
+
+        int[] intList19 = {1, 2, 6, 2, 3, 4, 6, 5, 5, 6, 7};
+        ArrayList<Integer> modes2 = Main.modes(intList19);
+        ArrayList<Integer> expected2 = new ArrayList<>(Arrays.asList(6));
+        assertEquals(expected2,modes2);
+
+        int[] intList20 = {1, 2, 1, 2, 4, 1, 2, 4, 1, 1, 3};
+        ArrayList<Integer> modes3 = Main.modes(intList20);
+        ArrayList<Integer> expected3 = new ArrayList<>(Arrays.asList(1));
+        assertEquals(expected3,modes3);
+
+        int[] intList21 = {1, 2, 3, 4, 3, 2, 1, 4, 1, 2, 3};
+        ArrayList<Integer> modes4 = Main.modes(intList21);
+        ArrayList<Integer> expected4 = new ArrayList<>(Arrays.asList(1,2,3));
+        assertEquals(expected4,modes4);
+
+        // all numbers appear 1 time
+        int[] intList22 = {1, 2, 3, 4, 5, 6};
+        ArrayList<Integer> modes5 = Main.modes(intList22);
+        ArrayList<Integer> expected5 = new ArrayList<>();
+        assertEquals(expected5,modes5);
+
+        // all numbers appear 3 times
+        int[] intList23 = {1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 1, 2, 3, 4, 5, 6};
+        ArrayList<Integer> modes6 = Main.modes(intList23);
+        ArrayList<Integer> expected6 = new ArrayList<>();
+        assertEquals(expected6,modes6);
+
+        // this one has an extra 7, so 1, 2, 3, 4, 5, and 6 are all modes!
+        int[] intList24 = {1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6};
+        ArrayList<Integer> modes7 = Main.modes(intList24);
+        ArrayList<Integer> expected7 = new ArrayList<>(Arrays.asList(1,2,3,4,5,6));
+        assertEquals(expected7,modes7);
+    }
 }
