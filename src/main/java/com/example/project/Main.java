@@ -161,7 +161,7 @@ public class Main{
     // of the given value which is alone is replaced by whichever value to its left or right is larger.
     // notAlone([1, 2, 3], 2) → [1, 3, 3]
     // notAlone([1, 2, 3, 2, 5, 2], 2) → [1, 3, 3, 5, 5, 5]
-    // notAlone([3, 4], 3) → [3, 3]
+    // notAlone([3, 4], 3) → [4, 4]
     public static ArrayList<Integer> notAlone(ArrayList<Integer> list, int val){
         return list;
     }
